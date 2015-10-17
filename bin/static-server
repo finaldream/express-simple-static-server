@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+/**
+ *  Simple Express.js server for serving local static content.
+ *  Helps e.g. with testing static site content in the local development process.
+ *
+ *  Run `static-server --help` for information on usage.
+ *
+ *  @author Oliver Erdmann, <o.erdmann@finaldream.de>
+ *  @since 17.10.2015
+ */
+
+"use strict";
+
+var express = require('express');
+var cli = require('commander');
+var pkg = require('../package');
+
+cli.version(pkg.version)
+    .description(pkg.description)
+    .usage('[options] <content-dir>')
+    .option('-a, --address <value>.', 'Address to listen to [127.0.0.1]', '127.0.0.1')
+    .option('-p, --port <value>.', 'Port to listen to [3000]', 3000)
+    .parse(process.argv);
+
+if (!cli.args.length > 0) {
+    console.error('Missing <content-dir> argument.');
+    return;
+}
+
+var contentDir = cli.args[0];
+
+var logger = function(req, res, next) {
+    console.log('GET', req.originalUrl);
+    next();
+};
+
+var app = express();
+app.use(logger);
+app.use('/', express.static(contentDir));
+
+var server = app.listen(cli.port, cli.address, function() {
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('Serving content from http://%s:%s', host, port);
+});

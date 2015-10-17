@@ -1,0 +1,33 @@
+{
+  "name": "express-simple-static-server",
+  "version": "0.1.0",
+  "description": "Simple Express.js server for serving local static content.",
+  "bin": {
+      "static-server": "bin/static-server"
+  },
+  "main": "bin/static-server",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/finaldream/express-simple-static-server.git"
+  },
+  "keywords": [
+    "static",
+    "server",
+    "express",
+    "development"
+  ],
+  "author": "Oliver Erdmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/finaldream/express-simple-static-server/issues"
+  },
+  "homepage": "https://github.com/finaldream/express-simple-static-server#readme"
+}
